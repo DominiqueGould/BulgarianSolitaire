@@ -12,7 +12,6 @@ public class BulgarianSolitaire
     private int[] deckOfCards;
     private int initialNumberOfPiles;
     private int currentNonzeroPiles;
-    private boolean correctConfiguration;
     
     /**
      * Creates a new game of BulgarianSolitaire
@@ -39,7 +38,8 @@ public class BulgarianSolitaire
      */
     public void play(PrintWriter out)
     {
-        while (correctConfiguration == false)
+        boolean stopGame = checkArray();
+        while (!stopGame)
         {
             //Removes any zeroes if they happen to be in the starting configuration.
             removeZeroes();
@@ -55,6 +55,8 @@ public class BulgarianSolitaire
             removeZeroes();
             deckOfCards = Arrays.copyOf(deckOfCards, (deckOfCards.length + 1));
             deckOfCards[deckOfCards.length - 1] = cardsInNewPile;
+            
+            stopGame = checkArray();
         }
     }
     
@@ -84,13 +86,13 @@ public class BulgarianSolitaire
     {
         //Constructs an array of booleans. All values will be set to true if deckOfCards[]
         //has the correct configuration.
-        correctConfiguration = false;
-        boolean[] sequence = new boolean[10];
+        boolean correctConfiguration = false;
+        boolean[] sequence = new boolean[9];
         for (int i = 0; i < deckOfCards.length; i++)
         {
-            for (int j = 1; j < sequence.length; j++)
+            for (int j = 0; j < sequence.length; j++)
             {
-                if (deckOfCards[i] == j)
+                if (deckOfCards[i] == (j + 1))
                 {
                     sequence[j] = true;
                 }
@@ -100,8 +102,7 @@ public class BulgarianSolitaire
         //Checks whether all values in the boolean array are true.
         if ((sequence[0] == true) && (sequence[1] == true) && (sequence[2] == true) && 
         (sequence[3] == true) && (sequence[4] == true) && (sequence[5] == true) &&
-        (sequence[6] == true) && (sequence[7] == true) && (sequence[8] == true) &&
-        (sequence[9] == true)&& (sequence[10] == true))
+        (sequence[6] == true) && (sequence[7] == true) && (sequence[8] == true))
         {
             correctConfiguration = true;
         }
