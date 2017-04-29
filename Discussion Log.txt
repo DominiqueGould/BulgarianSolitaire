@@ -1,0 +1,9 @@
+Discussion Log
+Assignment: Project 6
+Name: Dominique Gould
+
+I first ran into difficulty with this project getting the 45 cards distributed into a random number of piles. The hint in the intructions that the cards should be evenly distributed except possibly the last pile led me to write the constructor so it would divide 45 by the number of piles minus 1, add that number of cards to the first piles, and then add any remaining cards to the last pile. Sometimes this will generate a pile with 0 cards in it if the number is divisible by 45, but it doesn't impact gameplay.
+
+The professor's advice of creating an array of booleans to check whether the correct configuration had been reached helped me to write my private checkArray() method. I also got help from the professor for the private removeZeros() method. After that, I was able to write out the rest of my code, but the Java virtual machine went into an infinite loop when I tried the run the Project6 driver.
+
+After emailing the professor for help, I went back and looked at my checkArray() method and noticed I got some of the numbers wrong. I fixed that and made sure the checkArray() method would be invoked at the end of every turn. The program stopped going into an infinite loop after that, but the output file was empty after it ran. I realized I needed to use the PrintWriter parameter to print the array after every turn, and after that the program worked as intended.

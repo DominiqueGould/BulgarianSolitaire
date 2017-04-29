@@ -5,7 +5,7 @@ import java.io.*;
  * Simulates a game of BulgarianSolitaire.
  * 
  * @author Dominique Gould
- * @version 4-27-17
+ * @version 4-29-17
  */
 public class BulgarianSolitaire
 {
@@ -35,29 +35,52 @@ public class BulgarianSolitaire
     
     /**
      * Plays a game of Bulgarian Solitaire.
+     * @param a PrintWriter object to print the results of each turn to an output file.
      */
     public void play(PrintWriter out)
     {
         boolean stopGame = checkArray();
+        int numberOfTries = 0;
+        
+        //Prints the initial number of piles and the initial configuration.
+        out.print("Initial number of piles: ");
+        out.println(initialNumberOfPiles);
+        for (int i = 0; i < deckOfCards.length; i++)
+            {
+                out.print(deckOfCards[i] + " ");
+            }
+        out.println();
+        
+        //Plays the game until the correct configuration is reached.
         while (!stopGame)
         {
             //Removes any zeroes if they happen to be in the starting configuration.
             removeZeroes();
-            
             //Subtracts a card from each pile in the array.
             for (int i = 0; i < deckOfCards.length; i++)
             {
                 deckOfCards[i] = (deckOfCards[i] - 1);
             }
-            int cardsInNewPile = deckOfCards.length;
             
+            int cardsInNewPile = deckOfCards.length;
+
             //Removes any zeroes from the new configuration.
             removeZeroes();
+            //Adds new pile at the end.
             deckOfCards = Arrays.copyOf(deckOfCards, (deckOfCards.length + 1));
             deckOfCards[deckOfCards.length - 1] = cardsInNewPile;
+            //Prints the new configuration.
+            for (int i = 0; i < deckOfCards.length; i++)
+            {
+                out.print(deckOfCards[i] + " ");
+            }
+            out.println();
             
+            numberOfTries++;
             stopGame = checkArray();
         }
+        
+        out.print("Game is over. It took " + numberOfTries + " tries.");
     }
     
     /**
