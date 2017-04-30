@@ -43,8 +43,10 @@ public class BulgarianSolitaire
         int numberOfTries = 0;
         
         //Prints the initial number of piles and the initial configuration.
+        out.println("Game Begins!");
         out.print("Initial number of piles: ");
         out.println(initialNumberOfPiles);
+        out.println();
         for (int i = 0; i < deckOfCards.length; i++)
             {
                 out.print(deckOfCards[i] + " ");
@@ -80,6 +82,7 @@ public class BulgarianSolitaire
             stopGame = checkArray();
         }
         
+        out.println();
         out.print("Game is over. It took " + numberOfTries + " tries.");
     }
     
